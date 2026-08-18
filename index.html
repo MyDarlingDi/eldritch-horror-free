@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#101615">
-  <meta name="description" content="Общая цифровая комната Eldritch Horror: Streamlined v0.3">
-  <title>Eldritch Horror: Streamlined v0.3</title>
+  <meta name="description" content="Общая цифровая комната Eldritch Horror: Streamlined v0.4">
+  <title>Eldritch Horror: Streamlined v0.4</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cthulhu.css">
   <link rel="stylesheet" href="monsters.css">
@@ -15,13 +15,14 @@
   <link rel="stylesheet" href="v14.css?v=14">
   <link rel="stylesheet" href="v15.css?v=15">
   <link rel="stylesheet" href="v16.css?v=16">
+  <link rel="stylesheet" href="v18.css?v=18">
 </head>
 <body>
   <header class="masthead">
     <div>
       <p class="eyebrow">Общая цифровая комната</p>
       <h1>ELDRITCH <span>HORROR</span></h1>
-      <p class="subtitle">Streamlined <b>v0.3</b></p>
+      <p class="subtitle">Streamlined <b>v0.4</b></p>
     </div>
     <div class="header-actions"><button class="room-button" data-act="room"><span id="room-status">Локальная партия</span><b id="room-code">Общая комната</b></button><div class="round-box"><span>Раунд</span><strong id="round">1</strong><button data-act="round">Следующий</button></div></div>
   </header>
@@ -55,7 +56,7 @@
         <article><p class="label">Врата по знамениям</p><div class="gate-row" id="gates"></div><small>Нужны для автоматического расчёта повышения безысходности.</small></article>
         <article><p class="label">На поле</p><div class="mini-grid"><label>Врата<strong class="derived-total" id="gate-total">0</strong></label><label>Монстры<strong class="derived-total" id="monster-total">0</strong></label><label>Улики<input id="clue-total" type="number" min="0" value="0"></label><label>Главы<input id="mystery-total" type="number" min="0" value="0"></label></div><small>Врата, монстры и прогресс считаются автоматически.</small></article>
       </div>
-      <article class="campaign-board"><div class="article-head"><div><p class="kicker">Streamlined v0.3 · вместо официальных карт тайн</p><h3>Расследование Ктулху</h3></div><button data-act="campaign-help">Как это работает</button></div><div id="campaign-progress"></div></article>
+      <article class="campaign-board"><div class="article-head"><div><p class="kicker">Streamlined v0.4 · сюжетная кампания</p><h3>Расследование Ктулху</h3></div><button data-act="campaign-help">Как это работает</button></div><div id="campaign-progress"></div></article>
       <div id="party-alerts" class="party-alerts"></div>
     </section>
 
@@ -96,6 +97,7 @@
   <script src="v14.js?v=14"></script>
   <script src="v15.js?v=15"></script>
   <script src="v16.js?v=16"></script>
+  <script src="v18.js?v=18"></script>
   <script src="firebase-room.js?v=1"></script>
 </body>
 </html>
