@@ -1,9 +1,7 @@
 window.FIREBASE_ROOM_MODE = true;
 
-// Вставьте сюда данные своего проекта Firebase.
-// Ключ apiKey не является паролем: доступ к данным защищают правила базы.
 window.FIREBASE_CONFIG = {
-  apiKey: "ВСТАВЬТЕ_API_KEY",
-  projectId: "ВСТАВЬТЕ_PROJECT_ID",
-  databaseURL: "https://ВСТАВЬТЕ_DATABASE_URL"
+  apiKey: "AIzaSyDHPphBX8_w7-WE65bQh-UMNCdDh1EFLCI",
+  projectId: "eldritch-horror-b2688",
+  databaseURL: "https://eldritch-horror-b2688-default-rtdb.europe-west1.firebasedatabase.app"
 };
