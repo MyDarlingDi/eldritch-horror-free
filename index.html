@@ -2,102 +2,21 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101615">
-  <meta name="description" content="Общая цифровая комната Eldritch Horror: Streamlined v0.4">
-  <title>Eldritch Horror: Streamlined v0.4</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101416">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>Древний Ужас · Хроники Ктулху</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="cthulhu.css">
-  <link rel="stylesheet" href="monsters.css">
-  <link rel="stylesheet" href="room.css">
-  <link rel="stylesheet" href="conditions.css?v=13">
-  <link rel="stylesheet" href="v13.css?v=13">
-  <link rel="stylesheet" href="v14.css?v=14">
-  <link rel="stylesheet" href="v15.css?v=15">
-  <link rel="stylesheet" href="v16.css?v=16">
-  <link rel="stylesheet" href="v18.css?v=18">
 </head>
 <body>
-  <header class="masthead">
-    <div>
-      <p class="eyebrow">Общая цифровая комната</p>
-      <h1>ELDRITCH <span>HORROR</span></h1>
-      <p class="subtitle">Streamlined <b>v0.4</b></p>
-    </div>
-    <div class="header-actions"><button class="room-button" data-act="room"><span id="room-status">Локальная партия</span><b id="room-code">Общая комната</b></button><div class="round-box"><span>Раунд</span><strong id="round">1</strong><button data-act="round">Следующий</button></div></div>
-  </header>
-
-  <nav class="tabs" aria-label="Основные разделы">
-    <button class="active" data-tab="world"><span>⌂</span>Партия</button>
-    <button data-tab="investigators"><span>♙</span>Мой сыщик</button>
-    <button data-tab="encounter"><span>⚔</span>Контакт</button>
-    <button data-tab="mythos"><span>✦</span>Миф</button>
-    <button data-tab="rules"><span>•••</span>Ещё</button>
-  </nav>
-
-  <main>
-    <section id="investigators" class="panel">
-      <div class="section-head"><div><p class="kicker">Личный планшет</p><h2>Мой сыщик</h2></div><button class="primary" data-act="add-investigator">Выбрать сыщика</button></div>
-      <p class="screen-intro">Здесь собраны здоровье, рассудок, улики, билеты, навыки и все действующие способности. Карточки остальных игроков доступны ниже только для просмотра.</p>
-      <div id="investigator-list" class="cards"></div>
-    </section>
-
-    <section id="world" class="panel active">
-      <div class="section-head"><div><p class="kicker">Общий стол</p><h2>Партия</h2></div><button class="primary phase-cta" type="button" onclick="openCurrentPhase()">Продолжить фазу</button></div>
-      <div id="phase-summary" class="phase-summary"></div>
-      <details class="ancient-details"><summary>Ктулху · правила Древнего</summary><article class="ancient-one">
-        <div class="cthulhu-sigil">C</div>
-        <div><p class="kicker">Древний этой партии</p><h2>Ктулху</h2><p>Спящий в Р’льехе · владыка глубин</p></div>
-        <div class="ancient-rules"><p><b>Расплата</b> Каждый сыщик в морской локации без жетона Древних кладёт такой жетон в свою локацию.</p><p><b>Вторжение</b> Входя в локацию с жетоном Древних, сыщик теряет 1 рассудок и становится задержанным.</p><p class="subtle">Если жетон появился там, где сыщик уже находился, эффект входа не срабатывает.</p></div>
-      </article></details>
-      <div class="world-grid">
-        <article class="doom-card"><p>Безысходность</p><div class="counter"><button data-counter="doom" data-delta="-1">−</button><strong id="doom">14</strong><button data-counter="doom" data-delta="1">+</button></div><small>Меньшее число опаснее; 0 пробуждает Древнего.</small></article>
-        <article><p class="label">Знамение</p><div class="omen" id="omen"><button data-omen="0">●</button><button data-omen="1">☄</button><button data-omen="2">◐</button><button data-omen="3">✦</button></div><button class="wide" data-act="next-omen">Следующее знамение</button></article>
-        <article><p class="label">Врата по знамениям</p><div class="gate-row" id="gates"></div><small>Нужны для автоматического расчёта повышения безысходности.</small></article>
-        <article><p class="label">На поле</p><div class="mini-grid"><label>Врата<strong class="derived-total" id="gate-total">0</strong></label><label>Монстры<strong class="derived-total" id="monster-total">0</strong></label><label>Улики<input id="clue-total" type="number" min="0" value="0"></label><label>Главы<input id="mystery-total" type="number" min="0" value="0"></label></div><small>Врата, монстры и прогресс считаются автоматически.</small></article>
-      </div>
-      <article class="campaign-board"><div class="article-head"><div><p class="kicker">Streamlined v0.4 · сюжетная кампания</p><h3>Расследование Ктулху</h3></div><button data-act="campaign-help">Как это работает</button></div><div id="campaign-progress"></div></article>
-      <div id="party-alerts" class="party-alerts"></div>
-    </section>
-
-    <section id="encounter" class="panel">
-      <div class="section-head"><div><p class="kicker">Пошаговый помощник</p><h2>Контакт и бой</h2></div></div>
-      <div id="encounter-dashboard" class="encounter-dashboard"></div>
-      <article class="contact-order"><p class="kicker">Порядок фазы</p><ol><li><b>Проверьте монстров.</b> Если они есть в локации, сначала проведите бой с каждым.</li><li><b>Выберите один контакт.</b> Локация, улика, врата, экспедиция или особая карта.</li><li><b>Запишите результат.</b> Приложение обновит ресурсы, расследование и журнал партии.</li></ol></article>
-    </section>
-
-    <section id="mythos" class="panel">
-      <div class="section-head"><div><p class="kicker">Цифровая колода Ктулху</p><h2>Миф</h2></div><button class="primary" data-act="start-mythos">Вытянуть карту</button></div>
-      <div class="mythos-layout single">
-        <article class="mythos-runner"><div id="mythos-step" class="step-display"><span>Готово</span><h3>Нажмите «Начать фазу»</h3><p>Читайте значки физической карты слева направо. Companion не заменяет её текст.</p></div><div class="runner-actions"><button data-act="mythos-prev">Назад</button><button class="primary" data-act="mythos-next">Выполнено →</button></div></article>
-      </div>
-    </section>
-
-    <section id="rules" class="panel">
-      <div class="section-head"><div><p class="kicker">Управление и справочник</p><h2>Ещё</h2></div></div>
-      <article class="monster-board"><div class="article-head"><div><p class="kicker">Угрозы на поле</p><h3>Монстры</h3></div><button data-act="add-monster">+ Добавить</button></div><div id="monster-list" class="monster-list"></div></article>
-      <div class="split">
-        <article><div class="article-head"><h3>Процессы и слухи</h3><button data-act="add-process">+ Добавить</button></div><div id="process-list"></div></article>
-        <article><div class="article-head"><h3>Журнал партии</h3><button data-act="add-log">+ Запись</button></div><ol id="story-log" class="timeline"></ol></article>
-      </div>
-      <details class="more-block"><summary>Справочник правил</summary><div class="more-content"><div class="segmented"><button class="active" data-rule-mode="all">Все</button><button data-rule-mode="official">Официальные</button><button data-rule-mode="home">Хоумрулы</button></div><div class="rule-banner"><b>Streamlined v0.3</b><span>Удаляем процедуру, но не решение, риск или сюжет.</span></div><div id="rules-grid" class="rules-grid"></div></div></details>
-      <details class="more-block"><summary>Управление партией</summary><div class="more-content management-actions"><button class="ghost" data-act="room">Общая комната</button><button class="ghost" data-act="export">Экспорт копии</button><label class="ghost import">Импорт копии<input id="import-file" type="file" accept="application/json"></label><button class="danger" data-act="new-game">Начать новую партию</button></div></details>
-    </section>
-  </main>
-
-  <footer><span>В общей комнате партия синхронизируется между телефонами. Без комнаты сохраняется на этом устройстве.</span></footer>
-
-  <dialog id="modal"><form method="dialog"><button class="close" value="cancel" aria-label="Закрыть">×</button><div id="modal-content"></div></form></dialog>
-  <script src="firebase-config.js?v=1"></script>
-  <script src="database.js?v=13"></script>
-  <script src="catalog.js?v=13"></script>
-  <script src="mythos-data.js?v=13"></script>
-  <script src="app.js?v=17"></script>
-  <script src="v13.js?v=13"></script>
-  <script src="v14.js?v=14"></script>
-  <script src="v15.js?v=15"></script>
-  <script src="v16.js?v=16"></script>
-  <script src="v18.js?v=18"></script>
-  <script src="firebase-room.js?v=1"></script>
+  <div id="app"></div>
+  <dialog id="modal"><div id="modal-body"></div></dialog>
+  <div id="toast" role="status"></div>
+  <script src="firebase-config.js"></script>
+  <script src="catalog.js"></script>
+  <script src="mythos-data.js"></script>
+  <script src="room.js"></script>
+  <script src="app.js"></script>
+  <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});</script>
 </body>
 </html>

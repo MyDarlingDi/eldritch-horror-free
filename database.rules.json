@@ -3,11 +3,13 @@
     "rooms": {
       "$code": {
         ".read": "auth != null && $code.matches(/^[A-Z2-9]{6}$/)",
-        ".write": "auth != null && $code.matches(/^[A-Z2-9]{6}$/) && newData.exists()",
-        "state": { ".validate": "newData.exists()" },
-        "createdAt": { ".validate": "newData.isNumber()" },
-        "updatedAt": { ".validate": "newData.isNumber()" },
-        "ownerUid": { ".validate": "newData.isString()" },
+        ".write": "auth != null && $code.matches(/^[A-Z2-9]{6}$/)",
+        "meta": { ".validate": "!newData.exists() || newData.hasChildren(['hostUid','updatedAt'])" },
+        "world": { ".validate": "!newData.exists() || newData.hasChild('doom')" },
+        "campaign": { ".validate": "!newData.exists() || newData.hasChildren(['chapter','stage'])" },
+        "players": { ".validate": true },
+        "log": { ".validate": true },
+        "undo": { ".validate": true },
         "$other": { ".validate": false }
       }
     }
