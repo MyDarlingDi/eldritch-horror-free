@@ -22,7 +22,7 @@
   }
   function makeCode(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',bytes=crypto.getRandomValues(new Uint8Array(6));return [...bytes].map(x=>chars[x%chars.length]).join('')}
   async function create(initial){
-    const a=await auth();for(let i=0;i<5;i++){const code=makeCode(),now=Date.now(),room={meta:{code,hostUid:a.uid,cohostUid:'',started:false,status:'lobby',createdAt:now,updatedAt:now},world:initial.world,campaign:initial.campaign,players:{},log:initial.log||[],undo:[]};const r=await request(`rooms/${code}`,{method:'PUT',body:room});if(r.ok){localStorage.setItem('eh-v05-room',code);return {code,room,uid:a.uid,deviceId}}}throw Error('Не удалось создать комнату')
+    const a=await auth();for(let i=0;i<5;i++){const code=makeCode(),now=Date.now(),room={meta:{code,mode:'room',hostUid:a.uid,cohostUid:'',started:false,status:'lobby',createdAt:now,updatedAt:now,round:1,phase:'Действия'},world:initial.world,campaign:initial.campaign,players:{},log:initial.log||[],undo:[]};const r=await request(`rooms/${code}`,{method:'PUT',body:room});if(r.ok){localStorage.setItem('eh-v05-room',code);return {code,room,uid:a.uid,deviceId}}}throw Error('Не удалось создать комнату')
   }
   async function join(code){code=String(code).trim().toUpperCase();if(!/^[A-Z2-9]{6}$/.test(code))throw Error('Код состоит из шести знаков');const a=await auth(),r=await request(`rooms/${code}`);if(!r.ok)throw Error('Комната недоступна');const room=await r.json();if(!room)throw Error('Комната не найдена');localStorage.setItem('eh-v05-room',code);return {code,room,uid:a.uid,deviceId}}
   async function patch(code,path,value){pushing=true;try{const r=await request(`rooms/${code}/${path}`,{method:'PUT',body:value});if(!r.ok)throw Error('Изменение не сохранено')}finally{pushing=false}}

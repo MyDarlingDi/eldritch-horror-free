@@ -1,0 +1,36 @@
+.investigator-slider {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 18px max(8vw, 16px) 24px;
+  margin-inline: -16px;
+  scrollbar-width: thin;
+}
+
+.investigator-slide {
+  flex: 0 0 min(78vw, 360px);
+  min-height: 410px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.investigator-slide h2 { font-size: 1.8rem; margin: .55rem 0 1rem; }
+.investigator-slide p { line-height: 1.55; }
+.investigator-slide button { width: 100%; margin-top: auto; }
+.investigator-slide button + button { margin-top: 9px; }
+
+@media (max-width: 620px) {
+  .investigator-slide { flex-basis: 84vw; }
+}
+
+.player-view button[onclick^="App.addGate"],
+.player-view button[onclick^="App.addFieldClue"],
+.player-view button[onclick^="App.removeWorld"],
+.player-view button[onclick^="App.addMonster"],
+.player-view button[onclick^="App.hurtMonster"],
+.player-view button[onclick^="App.resolveProcess"],
+.player-view button[onclick^="App.addMemory"] { display: none; }
+
+button[onclick="App.toggleReady()"] { display: none; }
